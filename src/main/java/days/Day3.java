@@ -1,19 +1,16 @@
-package days.Day3;
-
-import days.Day;
+package days;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day3 extends Day {
-    public Day3() {
-        inputFilePart1 = "src/main/java/days/Day3/day3.1.input";
-        inputFilePart2 = "src/main/java/days/Day3/day3.1.input";
+    public Day3(Boolean isTest) {
+        super(isTest);
     }
 
-    public void part1() {
-        String input = this.getInputPart1();
+    public String part1() {
+        String input = this.getInput();
         String[] lines = input.split("\r\n");
         int[] countOne = new int[lines[0].length()];
         int[] countZero = new int[lines[0].length()];
@@ -44,10 +41,11 @@ public class Day3 extends Day {
         System.out.printf("Gamma rate: %d%n", gamaValue);
         System.out.printf("Epsilon  rate: %d%n", epsilonValue);
         System.out.printf("Power consumption of the submarine: %d%n", gamaValue * epsilonValue);
+        return String.valueOf(gamaValue * epsilonValue);
     }
 
-    public void part2() {
-        String input = this.getInputPart2();
+    public String part2() {
+        String input = this.getInput();
         String[] lines = input.split("\r\n");
         int n = lines[0].length();
         List<String> currLines = Arrays.asList(lines);
@@ -58,6 +56,8 @@ public class Day3 extends Day {
 
         System.out.printf("CO2 scrubber rating: %d%n", CO2Rating);
         System.out.printf("Life support rating of the submarine: %d%n", O2Rating * CO2Rating);
+
+        return String.valueOf(O2Rating * CO2Rating);
     }
 
     private int getRating(int n, List<String> currLines, boolean mostCommon) {

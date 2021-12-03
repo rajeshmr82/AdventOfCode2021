@@ -1,18 +1,12 @@
-package days.Day2;
-
-import days.Day;
-
-import java.util.LinkedList;
-import java.util.Queue;
+package days;
 
 public class Day2 extends Day {
-    public Day2(){
-        inputFilePart1 = "src/main/java/days/Day2/input1.txt";
-        inputFilePart2 = "src/main/java/days/Day2/input1.txt";
+    public Day2(Boolean isTest){
+        super(isTest);
     }
 
-    public void part1(){
-        String input= this.getInputPart1();
+    public String part1(){
+        String input = this.getInput();
 
         int horizontal=0;
         int depth=0;
@@ -33,10 +27,12 @@ public class Day2 extends Day {
             }
         }
         System.out.printf("final horizontal position by final depth: %d%n", horizontal*depth);
+
+        return String.valueOf(horizontal*depth);
     }
 
-    public void part2() {
-        String input= this.getInputPart2();
+    public String part2() {
+        String input = this.getInput();
 
         int horizontal=0;
         int depth=0;
@@ -59,6 +55,7 @@ public class Day2 extends Day {
             }
         }
         System.out.printf("final horizontal position by final depth: %d%n", horizontal*depth);
+        return String.valueOf(horizontal*depth);
     }
 
 }

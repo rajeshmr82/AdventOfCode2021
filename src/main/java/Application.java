@@ -1,9 +1,15 @@
-import days.Day3.Day3;
+import days.Day;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         System.out.println("Advent Of Code 2021");
-        (new Day3()).run();
+        int[] days = new int[]{1,2,3,4};
+        for (int day: days) {
+            Day instance = (Day) Class.forName("days.Day" + day).getDeclaredConstructor(Boolean.class).newInstance(false);
+            instance.run();
+        }
     }
 }

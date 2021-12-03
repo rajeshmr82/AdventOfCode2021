@@ -1,34 +1,34 @@
-package days.Day1;
-
-import days.Day;
+package days;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Day1 extends Day {
-    public Day1(){
-        inputFilePart1 = "src/main/java/days/Day1/input1.txt";
-        inputFilePart2 = "src/main/java/days/Day1/input2.txt";
+
+    public Day1(Boolean isTest) {
+        super(isTest);
+        System.out.println(getClass().toString());
     }
 
-    public void part1(){
-        String input= this.getInputPart1();
+    public String part1() {
+        String input = this.getInput();
         int prev = -1;
-        int largerThanPrev=0;
+        int largerThanPrev = 0;
         for (String line : input.split("\r\n")) {
-            if(line.isEmpty()) break;
+            if (line.isEmpty()) break;
 
             int num = Integer.parseInt(line);
-            if(prev!=-1 && num>prev){
+            if (prev != -1 && num > prev) {
                 largerThanPrev++;
             }
-            prev=num;
+            prev = num;
         }
-        System.out.printf("measurements are larger than the previous measurement: %d%n", largerThanPrev);
+
+        return String.valueOf(largerThanPrev);
     }
 
-    public void part2() {
-        String input = this.getInputPart2();
+    public String part2() {
+        String input = this.getInput();
         Queue<Integer> queue = new LinkedList<>();
 
         int largerThanPrev = 0, sum = 0, prevSum = 0;
@@ -46,8 +46,7 @@ public class Day1 extends Day {
             }
         }
 
-
         System.out.printf("measurements are larger than the previous measurement: %d%n", largerThanPrev);
+        return String.valueOf(largerThanPrev);
     }
-
 }
