@@ -60,4 +60,17 @@ public class AOC2021Test {
         String result = day.part2();
         assertEquals("26984457539", result);
     }
+
+    @Test
+    void testDay7Part1() {
+        Day day = new Day7(true);
+        String result = day.part1();
+        assertEquals("37", result);
+    }
+    @Test
+    void testDay7Part2() {
+        Day day = new Day7(true);
+        String result = day.part2();
+        assertEquals("168", result);
+    }
 }
