@@ -53,54 +53,27 @@ public class Day8 extends Day {
             }
 
             List<String> sixPointDigits = Arrays.stream(samples).filter(s -> s.length() == 6).collect(Collectors.toList());
-            for (String s : sixPointDigits
-            ) {
-                String delta = removeIntersect(digits[8], s);
-                if (digits[1].contains(delta)) {
-                    sixPointDigits.remove(s);
-                    digits[6] = sortString(s);
-                    break;
+            for (String number: sixPointDigits
+                 ) {
+                if(digits[4].chars().allMatch(c -> number.indexOf(c)>=0)){ //six points and matching all points with 4 must be 9
+                    digits[9]= sortString(number);
+                } else if(digits[7].chars().allMatch(c -> number.indexOf(c)>=0)){ // if not nine and matches all points with 7 then it must be 0
+                    digits[0] = sortString(number);
+                } else { //if not 9 or 0 then it must be 6
+                    digits[6] = sortString(number);
                 }
             }
 
-            String top = removeIntersect(digits[7], digits[1]);
-
-            for (String s : sixPointDigits
-            ) {
-                String delta = removeIntersect(digits[8],s);
-                if (!delta.isEmpty() && !digits[4].contains(delta)) {
-                    sixPointDigits.remove(s);
-                    digits[9] = sortString(s);
-                    break;
-                }
-            }
-
-            if (sixPointDigits.size() == 1)
-                digits[0] = sortString(sixPointDigits.get(0));
-
-            String middle = removeIntersect(digits[8], digits[0]);
-            String bottom = removeIntersect(digits[9], digits[4] + top);
-
-            digits[3] = sortString(digits[1] + top + bottom + middle);
             List<String> fivePointDigits = Arrays.stream(samples).filter(s -> s.length() == 5).collect(Collectors.toList());
-            for (String s : fivePointDigits
-            ) {
-                if (digits[3].equals(sortString(s))) {
-                    fivePointDigits.remove(s);
-                    break;
+            for (String number:fivePointDigits
+                 ) {
+                if(digits[1].chars().allMatch(c -> number.indexOf(c)>=0)){ //five points and matching all points with 1 must be 3
+                    digits[3]= sortString(number);
+                } else if(number.chars().allMatch(c -> digits[6].indexOf(c)>=0)){ // if not 3 and matches all points with 6 then it must be 5
+                    digits[5] = sortString(number);
+                } else { //if not 3 or 5 then it must be 2
+                    digits[2] = sortString(number);
                 }
-            }
-            for (String s : fivePointDigits
-            ) {
-                String delta = removeIntersect(s, digits[6]);
-                if (delta.isEmpty()) {
-                    fivePointDigits.remove(s);
-                    digits[5] = sortString(s);
-                    break;
-                }
-            }
-            if (fivePointDigits.size() == 1) {
-                digits[2] = sortString(fivePointDigits.get(0));
             }
 
             for (int i = 0; i < digits.length; i++) {
@@ -118,30 +91,8 @@ public class Day8 extends Day {
             result += Integer.parseInt(outputBuilder.toString());
         }
 
-
         System.out.printf("Sum of output : %d%n", result);
         return String.valueOf(result);
-    }
-
-    private String removeIntersect(String s1, String s2){
-        HashSet<Character> h1 = new HashSet<>(), h2 = new HashSet<>();
-        for(int i = 0; i < s1.length(); i++)
-            h1.add(s1.charAt(i));
-        for(int i = 0; i < s2.length(); i++)
-        {
-            h2.add(s2.charAt(i));
-        }
-        h1.retainAll(h2);
-        Character[] res = h1.toArray(new Character[0]);
-        StringBuilder builder = new StringBuilder();
-        for (char c: s1.toCharArray()
-             ) {
-            if(Arrays.stream(res).noneMatch(r -> r.equals(c))){
-                builder.append(c);
-            }
-        }
-
-        return builder.toString();
     }
 
     private String sortString(String s) {
