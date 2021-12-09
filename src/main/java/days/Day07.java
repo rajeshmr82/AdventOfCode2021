@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class Day7 extends Day {
-    public Day7(Boolean isTest) {
+public class Day07 extends Day {
+    public Day07(Boolean isTest) {
         super(isTest);
     }
 

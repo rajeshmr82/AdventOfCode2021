@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Day5 extends Day {
-    public Day5(Boolean isTest) {
+public class Day05 extends Day {
+    public Day05(Boolean isTest) {
         super(isTest);
     }
 

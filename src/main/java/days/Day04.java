@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Day4 extends Day {
-    public Day4(Boolean isTest) {
+public class Day04 extends Day {
+    public Day04(Boolean isTest) {
         super(isTest);
     }
 

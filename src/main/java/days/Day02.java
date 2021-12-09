@@ -1,7 +1,7 @@
 package days;
 
-public class Day2 extends Day {
-    public Day2(Boolean isTest){
+public class Day02 extends Day {
+    public Day02(Boolean isTest){
         super(isTest);
     }
 

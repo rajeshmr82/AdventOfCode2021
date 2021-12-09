@@ -3,9 +3,9 @@ package days;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Day1 extends Day {
+public class Day01 extends Day {
 
-    public Day1(Boolean isTest) {
+    public Day01(Boolean isTest) {
         super(isTest);
         System.out.println(getClass().toString());
     }

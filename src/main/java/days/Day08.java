@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Day8 extends Day {
-    public Day8(Boolean isTest) {
+public class Day08 extends Day {
+    public Day08(Boolean isTest) {
         super(isTest);
     }
 
@@ -92,6 +92,57 @@ public class Day8 extends Day {
         }
 
         System.out.printf("Sum of output : %d%n", result);
+        return String.valueOf(result);
+    }
+
+    public String part2A(){
+        String[] input = this.getInput().split("\r\n");
+        int result=0;
+
+        HashMap<String,Integer> numberMapping = new HashMap<String,Integer>(){{
+            put("abcefg",0);
+            put("cf",1);
+            put("acdeg",2);
+            put("acdfg",3);
+            put("bcdf",4);
+            put("abdfg",5);
+            put("abdefg",6);
+            put("acf",7);
+            put("abcdefg",8);
+            put("abcdfg",9);
+        }};
+        HashMap<Character,Integer> segmentCount= new HashMap<>();
+        for (String num:numberMapping.keySet()
+             ) {
+            for (Character c: num.toCharArray()
+                 ) {
+                segmentCount.put(c,segmentCount.getOrDefault(c,0)+1);
+            }
+        }
+
+        for (String line : input
+        ) {
+            String[] parts = line.split(Pattern.quote("|"));
+            String[] samples = parts[0].split(" ");
+            String[] output = parts[1].trim().split(" ");
+            HashMap<Character,Integer> sampleSegmentCount= new HashMap<>();
+
+            for (String sample: samples
+                 ) {
+                for (Character c: sample.toCharArray()
+                ) {
+                    sampleSegmentCount.put(c,sampleSegmentCount.getOrDefault(c,0)+1);
+                }
+            }
+
+            HashMap<Character,List<Character>> wireMapping = new HashMap<>();
+
+
+
+            System.out.println(segmentCount);
+            System.out.println(sampleSegmentCount);
+        }
+
         return String.valueOf(result);
     }
 

@@ -3,8 +3,8 @@ package days;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Day6 extends Day {
-    public Day6(Boolean isTest) {
+public class Day06 extends Day {
+    public Day06(Boolean isTest) {
         super(isTest);
     }
 
