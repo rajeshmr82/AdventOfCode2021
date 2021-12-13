@@ -1,6 +1,7 @@
 package days;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day11 extends Day {
     public Day11(Boolean isTest) {
@@ -9,6 +10,7 @@ public class Day11 extends Day {
 
     public String part1() {
         String[] input = this.getInput().split("\r\n");
+
         long flashes=0;
         int r = input.length;
         int c = input[0].length();
