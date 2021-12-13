@@ -21,8 +21,7 @@ public class Day12 extends Day {
             }
             cave.addEdge(nodes[0], nodes[1]);
         }
-        //List<List<String>> paths = cave.allPaths();
-        List<List<String>> paths = cave.paths("start","end",false);
+        List<List<String>> paths = cave.paths("start","end",1);
 
         System.out.printf("Total paths: %d%n", paths.size());
         return String.valueOf(paths.size());
@@ -43,9 +42,7 @@ public class Day12 extends Day {
             cave.addEdge(nodes[0], nodes[1]);
         }
 
-        List<List<String>> paths = cave.paths("start","end",true);
-        //System.out.println(paths);
-
+        List<List<String>> paths = cave.paths("start","end",2);
 
         System.out.printf("Total paths: %d%n", paths.size());
         return String.valueOf(paths.size());

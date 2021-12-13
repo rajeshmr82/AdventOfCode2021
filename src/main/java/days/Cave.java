@@ -20,24 +20,24 @@ class Cave {
         return graph.get(node);
     }
 
-    public List<List<String>> paths(String src, String dst, boolean revisitAllowed) {
+    public List<List<String>> paths(String start, String destination, int threshold) {
         List<List<String>> paths = new ArrayList<>();
-        findPaths(src, dst, paths, revisitAllowed);
+        findPaths(start, destination, paths, threshold);
         return paths;
     }
 
-    private void findPaths(String src, String dst, List<List<String>> paths, boolean revisitAllowed) {
+    private void findPaths(String start, String destination, List<List<String>> paths, int threshold) {
         Queue<LinkedList<String>> queue = new LinkedList<>();
 
         LinkedList<String> path = new LinkedList<>();
-        path.add(src);
+        path.add(start);
         queue.offer(path);
 
         while (!queue.isEmpty()) {
             path = queue.poll();
             String last = path.getLast();
 
-            if (last.equals(dst)) {
+            if (last.equals(destination)) {
                 paths.add(path);
             }
 
@@ -45,7 +45,7 @@ class Cave {
 
             for (String node : lastNode
             ) {
-                if (isNotVisited(node, path, revisitAllowed)) {
+                if (isNotVisited(node, path, threshold)) {
                     LinkedList<String> newPath = new LinkedList<>(path);
                     newPath.add(node);
                     queue.offer(newPath);
@@ -54,25 +54,17 @@ class Cave {
         }
     }
 
-    private boolean isNotVisited(String node, LinkedList<String> path, boolean revisitAllowed) {
+    private boolean isNotVisited(String node, LinkedList<String> path, int threshold) {
         if (Character.isUpperCase(node.charAt(0)) || !path.contains(node)) return true;
 
-        if (revisitAllowed && !(node.equals("start") || node.equals("end"))) {
+        if (path.contains(node) && (node.equals("start") || node.equals("end"))) return false;
 
-            Map<String, Long> counted = path.stream()
-                    .filter(p -> Character.isLowerCase(p.charAt(0)))
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<String, Long> counted = path.stream()
+                .filter(p -> Character.isLowerCase(p.charAt(0)))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-            long othersCount = counted.entrySet().stream()
-                    .filter(e -> e.getValue() > 1 && !e.getKey().equals(node))
-                    .count();
+        return counted.entrySet().stream().noneMatch(c -> c.getValue() >= threshold);
 
-            Long nodeCount = counted.get(node);
-
-            return othersCount == 0 && nodeCount <= 1;
-        }
-
-        return !path.contains(node);
     }
 
 }
