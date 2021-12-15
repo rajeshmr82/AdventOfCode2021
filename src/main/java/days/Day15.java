@@ -4,16 +4,14 @@ import java.util.*;
 
 public class Day15 extends Day {
 
-    static int[][] offset = { {-1,0}, {0,1}, {1,0}, {0,-1} };
+    static int[][] offset = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
-    static class Cell
-    {
+    static class Cell {
         int x;
         int y;
         int risk;
 
-        Cell(int x, int y, int risk)
-        {
+        Cell(int x, int y, int risk) {
             this.x = x;
             this.y = y;
             this.risk = risk;
@@ -35,17 +33,16 @@ public class Day15 extends Day {
         int[][] grid = new int[input.length][input[0].length()];
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input[0].length(); j++) {
-                grid[i][j]=Integer.parseInt(String.valueOf(input[i].charAt(j)));
+                grid[i][j] = Integer.parseInt(String.valueOf(input[i].charAt(j)));
             }
         }
-        int result =shortestPath(grid,grid.length,grid[0].length);
+        int result = shortestPath(grid, grid.length, grid[0].length);
         System.out.printf("Lowest total risk: %d%n", result);
         return String.valueOf(result);
     }
 
 
-    static boolean isValid(int i, int j, int ROW, int COL)
-    {
+    static boolean isValid(int i, int j, int ROW, int COL) {
         return (i >= 0 && i < ROW &&
                 j >= 0 && j < COL);
     }
@@ -59,7 +56,7 @@ public class Day15 extends Day {
             }
         }
 
-        dist[0][0] = grid[0][0];
+        dist[0][0] = 0;
 
         PriorityQueue<Cell> queue = new PriorityQueue<>(rows * cols, new riskComparator());
 
@@ -84,7 +81,7 @@ public class Day15 extends Day {
             }
         }
 
-        return dist[rows - 1][cols - 1] - dist[0][0];
+        return dist[rows - 1][cols - 1];
     }
 
     public String part2() {
@@ -97,19 +94,21 @@ public class Day15 extends Day {
         }
 
         int c = input[0].length();
-
-        for (int offset = c; offset < c*5; offset++) {
-            for (int j = 0; j < input[0].length(); j++) {
-                grid[j][offset] = (grid[j][offset - c] + 1) > 9 ? 1 : (grid[j][offset - c] + 1);
-            }
-        }
         int r = input.length;
-        for (int rOffset = r; rOffset < r*5; rOffset++) {
-            for (int cOffset = 0; cOffset < c * 5; cOffset++) {
-                grid[rOffset][cOffset] = (grid[rOffset - r][cOffset] + 1) > 9 ? 1 : (grid[rOffset - r][cOffset] + 1);
+
+
+        for (int offset = c; offset < c * 5; offset++) {
+            for (int j = 0; j < input[0].length(); j++) {
+                grid[j][offset] = (grid[j][offset - c]) % 9 + 1;
             }
         }
-        int result =shortestPath(grid,grid.length,grid[0].length);
+
+        for (int rOffset = r; rOffset < r * 5; rOffset++) {
+            for (int cOffset = 0; cOffset < c * 5; cOffset++) {
+                grid[rOffset][cOffset] = grid[rOffset - r][cOffset] % 9 + 1;
+            }
+        }
+        int result = shortestPath(grid, grid.length, grid[0].length);
         System.out.printf("Lowest total risk: %d%n", shortestPath(grid, grid.length, grid[0].length));
         return String.valueOf(result);
     }
