@@ -64,11 +64,8 @@ public class Day17 extends Day {
         Matcher m = pattern.matcher(input[0]);
         long maxHeight = 0;
         if (m.find()) {
-            System.out.printf("xMin:%s,xMax:%s,%nyMin:%s,yMax:%s%n", m.group(1), m.group(2), m.group(3), m.group(4));
             int minY = Integer.parseInt(m.group(3));
-
             maxHeight = (long) (Math.abs(minY)) * (Math.abs(minY) - 1) / 2;
-
         }
 
         System.out.printf("Highest y position: %d%n", maxHeight);
